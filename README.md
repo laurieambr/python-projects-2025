@@ -10,7 +10,7 @@ Ce repo regroupe tous mes projets pratiques en Python pour :
 
 ## 📁 Projets
 
-- `01_rr_calculator` → Calculateur RR + taille de position (console)
+- `01_rr_calculator` → Calculateur RR + taille de position (version console et streamlit)
 - `02_backtest_rsi` → Backtest d'une stratégie RSI sur données CSV
 - `03_visualisation_perf` → Graphiques de performance (capital, winrate, etc.)
 - `04_mini_game` → Jeu simple en Python pour travailler la logique
