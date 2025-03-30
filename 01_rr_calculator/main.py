@@ -1,22 +1,36 @@
-def input_with_default_value(prompt, default):
+def custom_input(prompt, default=None, return_type=float):
     '''
     Récupère les inputs et renvoie leur valeur ou une valeur par défaut
 
     Args:
         prompt (str): Prompt de l'utilisateur
         default : Valeur par défaut
+        return_type (type): Type de retour
 
     Returns:
-        str: Valeur de l'utilisateur
+        return_type: Valeur de l'utilisateur
     '''
-    user_input = input(f"{prompt} (par défaut : {default}) ? ")
-    return user_input if user_input.strip() != "" else default
-
-capital = float(input("Entrez le montant de votre capital ? "))
-risque = float(input_with_default_value("Quelle est le pourcentage de risque", 1))
-contract_size = int(input_with_default_value("Quel est la taille de contrat", 100000))
-digits = int(input_with_default_value("Quel est le nombre de decimal de votre actif", 5))
-stop_loss_pips = float(input("Quel est le stop loss en pips ? "))
+    while True:
+        if default is not None:
+            user_input = input(f"{prompt} (par défaut : {default}) ? ")
+            if (user_input.strip() == ""):
+                    user_input = default
+        else:
+            user_input = input(f"{prompt} ? ")
+            
+        try:
+            if return_type(user_input) <= 0:
+                raise ValueError
+            else:
+                return return_type(user_input)
+        except ValueError:
+            print(f"[ERREUR] Entrée invalide. Merci de taper un(e) {return_type.__name__}.")
+        
+capital = custom_input("Entrez le montant de votre capital", None, float)
+risque = custom_input("Quelle est le pourcentage de risque", 1, float)
+contract_size = custom_input("Quel est la taille de contrat", 100000, int)
+digits = custom_input("Quel est le nombre de decimal de votre actif", 5, int)
+stop_loss_pips = custom_input("Quel est le stop loss en pips", None, float)
 
 def calcul_risque(risque_=1):
     '''
