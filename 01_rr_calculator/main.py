@@ -1,27 +1,49 @@
-'''
-Saisies des informations par l'utilisateur
-'''
-capital = input("Entrez votre capital ?")
-risque = input("Quelle est le pourcentage de risque ?")
-stop_loss_pips = input("Quel est le stop loss en pips ?")
-contract_size = input("Quel est la taille de contrat ?")
+
+capital = float(input("Entrez le montant de votre capital ? "))
+risque = int(input("Quelle est le pourcentage de risque ? "))
+contract_size = int(input("Quel est la taille de contrat ? "))
+digits = int(input("Quel est le nombre de decimal de votre actif ? "))
+stop_loss_pips = float(input("Quel est le stop loss en pips ? "))
 
 '''
-Retourne le montant risqué
+Calcul le montant risqué
+
+Returns:
+        int: montant risqué
 '''
 def calcul_risque():
     return capital * (risque/100)
 
+
+risque_price = calcul_risque()
+
+def get_digits_multiplicateur(digits):
+    '''
+    Retourne le multiplicateur en fonction du nombre de decimal
+    Exemple :   5 => 10000
+                3 => 100
+    
+    Args:
+        digits (int): Nombre de decimal
+
+    Returns:
+        int: Multiplicateur
+    '''
+    return 10 ** (digits - 1)
+
 '''
-Retourne la taille de position
+Calcul la taille de position dynamiquement
+
+Returns:
+        float: taille de lot à utiliser
 '''
 def calcul_position_size():
-    # en cours
-    return None
+    return ((risque_price / stop_loss_pips) * get_digits_multiplicateur(digits)) / contract_size
+
 
 '''
 On affiche les informations à l'utilisateur
 '''
-print(f'Capital : ${capital} €')
-print(f'Risque : ${risque} % => Perte possible : ${calcul_risque()} €')
-print(f'Stop Loss : ${stop_loss_pips} pips => Taille de position : {calcul_position_size()}')
+print(f'Capital : {capital:.2f} €')
+print(f'Risque : {risque} % => Perte possible : {risque_price:.2f} €')
+print(f'Stop Loss : {stop_loss_pips} pips => Taille de position : {calcul_position_size():.2f}')
