@@ -1,5 +1,7 @@
 # 🧮 RR + Position Sizing Calculator
 
+URL Public : https://python-projects-2025-rr-calculator.streamlit.app/
+
 ## 🎯 Objectif
 Créer un script console pour calculer :
 - Le montant risqué

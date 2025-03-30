@@ -1,4 +1,10 @@
-def custom_input(prompt, default=None, return_type=float):
+import streamlit as st
+
+st.title('RR + Position Sizing Calculator')
+
+st.markdown("Répondez aux questions suivantes pour calculer la taille de position de votre trade.")
+
+def custom_input(prompt, default=None):
     '''
     Récupère les inputs et renvoie leur valeur ou une valeur par défaut
 
@@ -12,25 +18,25 @@ def custom_input(prompt, default=None, return_type=float):
     '''
     while True:
         if default is not None:
-            user_input = input(f"{prompt} (par défaut : {default}) ? ")
+            user_input = st.number_input(f"{prompt} (par défaut : {default}) ? ")
             if (user_input.strip() == ""):
                     user_input = default
         else:
-            user_input = input(f"{prompt} ? ")
+            user_input = st.number_input(f"{prompt} ? ")
             
         try:
-            if return_type(user_input) <= 0:
+            if user_input <= 0:
                 raise ValueError
             else:
-                return return_type(user_input)
+                return user_input
         except ValueError:
             print(f"[ERREUR] Entrée invalide. Merci de taper un(e) {return_type.__name__}.")
         
-capital = custom_input("Entrez le montant de votre capital", None, float)
-risque = custom_input("Quelle est le pourcentage de risque", 1, float)
-contract_size = custom_input("Quel est la taille de contrat", 100000, int)
-digits = custom_input("Quel est le nombre de decimal de votre actif", 5, int)
-stop_loss_pips = custom_input("Quel est le stop loss en pips", None, float)
+capital = custom_input("Entrez le montant de votre capital", None)
+risque = custom_input("Quelle est le pourcentage de risque", 1)
+contract_size = custom_input("Quel est la taille de contrat", 100000)
+digits = custom_input("Quel est le nombre de decimal de votre actif", 5)
+stop_loss_pips = custom_input("Quel est le stop loss en pips", None)
 
 def calcul_risque(risque_=1):
     '''
@@ -71,6 +77,6 @@ def calcul_position_size():
 '''
 On affiche les informations à l'utilisateur
 '''
-print(f'Capital : {capital:.2f} €')
-print(f'Risque : {risque} % => Perte possible : {risque_price:.2f} €')
-print(f'Stop Loss : {stop_loss_pips} pips => Taille de position : {calcul_position_size():.2f}')
+st.write(f'Capital : {capital:.2f} €')
+st.write(f'Risque : {risque} % => Perte possible : {risque_price:.2f} €')
+st.write(f'Stop Loss : {stop_loss_pips} pips => Taille de position : {calcul_position_size():.2f}')
