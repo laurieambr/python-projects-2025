@@ -1,31 +1,38 @@
+"""
+main.py - Script pour calculer la taille de position en trading.
+
+Ce script permet à l'utilisateur d'entrer ses paramètres de trade et retourne
+la taille de lot optimale.
+"""
+
+
 def custom_input(prompt, default=None, return_type=float):
     '''
     Récupère les inputs et renvoie leur valeur ou une valeur par défaut
 
     Args:
         prompt (str): Prompt de l'utilisateur
-        default : Valeur par défaut
+        default (int|float): Valeur par défaut
         return_type (type): Type de retour
 
     Returns:
-        return_type: Valeur de l'utilisateur
+        return_type (int|float): Valeur de l'utilisateur
     '''
     while True:
         if default is not None:
             user_input = input(f"{prompt} (par défaut : {default}) ? ")
-            if (user_input.strip() == ""):
-                    user_input = default
+            if user_input.strip() == "":
+                user_input = default
         else:
             user_input = input(f"{prompt} ? ")
-            
+
         try:
             if return_type(user_input) <= 0:
                 raise ValueError
-            else:
-                return return_type(user_input)
+            return return_type(user_input)
         except ValueError:
             print(f"[ERREUR] Entrée invalide. Merci de taper un(e) {return_type.__name__}.")
-        
+
 capital = custom_input("Entrez le montant de votre capital", None, float)
 risque = custom_input("Quelle est le pourcentage de risque", 1, float)
 contract_size = custom_input("Quel est la taille de contrat", 100000, int)
@@ -35,6 +42,9 @@ stop_loss_pips = custom_input("Quel est le stop loss en pips", None, float)
 def calcul_risque(risque_=1):
     '''
     Calcul le montant risqué
+    
+    Args:
+        risque_ (int): Pourcentage de risque
 
     Returns:
             int: montant risqué
@@ -67,10 +77,6 @@ def calcul_position_size():
     '''
     return ((risque_price / stop_loss_pips) * get_digits_multiplicateur(digits)) / contract_size
 
-
-'''
-On affiche les informations à l'utilisateur
-'''
 print(f'Capital : {capital:.2f} €')
 print(f'Risque : {risque} % => Perte possible : {risque_price:.2f} €')
 print(f'Stop Loss : {stop_loss_pips} pips => Taille de position : {calcul_position_size():.2f}')

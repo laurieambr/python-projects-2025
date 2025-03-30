@@ -1,3 +1,10 @@
+"""
+main.py - Application Streamlit pour calculer la taille de position en trading.
+
+Ce script permet à l'utilisateur d'entrer ses paramètres de trade et retourne
+la taille de lot approprié.
+"""
+
 import streamlit as st
 
 def custom_input(prompt, default=None):
@@ -40,11 +47,7 @@ def get_digits_multiplicateur(digits_=5):
     '''
     return 10 ** (digits_ - 1)
 
-'''
-Affichage de la page streamlit
-'''
-
-st.title('RR + Position Sizing Calculator')
+st.title('Calculateur taille de position de trading')
 
 st.markdown('Répondez aux question pour calculer la taille de position de votre trade.')
 
@@ -59,9 +62,10 @@ if st.button('Calculer la taille de position', type='primary'):
     if capital > 0 and risque > 0 and contract_size > 0 and digits > 0 and stop_loss_pips > 0:
         risque_price = calcul_risque(risque)
         lot = ((risque_price / stop_loss_pips) * get_digits_multiplicateur(digits)) / contract_size
-        
+
         st.subheader(f'Taille de position : {lot:.2f}')
         st.write(f'**Montant risque** : {risque_price:.2f}')
-        
+
     elif capital <= 0 or risque <= 0 or contract_size <= 0 or digits <= 0 or stop_loss_pips <= 0:
-        st.error('Veuillez renseigner tous les champs. Certains ont une valeur inférieur ou égale à zéro.')
+        st.error('Veuillez renseigner tous les champs. Certains ont une valeur inférieur ou'
+                 ' égale à zéro.')
