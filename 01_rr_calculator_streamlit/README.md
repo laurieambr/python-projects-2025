@@ -4,9 +4,11 @@
 ## `README.md` – **Version Streamlit**
 
 ```markdown
-# RR & Position Sizing Calculator – Version Web (Streamlit)
+# Position Sizing Calculator – Version Web (Streamlit)
 
 Une application simple en Python avec Streamlit pour calculer la taille de position idéale en trading forex.
+
+Lien : https://python-projects-2025-rr-calculator.streamlit.app/
 
 ---
 
