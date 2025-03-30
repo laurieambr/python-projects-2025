@@ -1,14 +1,24 @@
-# 🧮 RR + Position Sizing Calculator
 
-URL Public : https://python-projects-2025-rr-calculator.streamlit.app/
+---
 
-## 🎯 Objectif
-Créer un script console pour calculer :
-- Le montant risqué
-- La taille de position
-- Le ratio Risk/Reward
-- Un résumé clair du trade
+## `README.md` – **Version Streamlit**
 
-## 📦 À venir
-✅ Script Python de base  
-🔜 Export CSV + affichage stylé  
+```markdown
+# RR & Position Sizing Calculator – Version Web (Streamlit)
+
+Une application simple en Python avec Streamlit pour calculer la taille de position idéale en trading forex.
+
+---
+
+## Fonctionnalités
+
+- Interface interactive (capital, % de risque, SL, digits)
+- Résultat dynamique : montant risqué + taille de lot
+- Choix du nombre de digits selon la paire
+
+---
+
+## Lancer l'app
+
+```bash
+streamlit run app.py
