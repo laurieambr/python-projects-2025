@@ -49,7 +49,7 @@ def get_digits_multiplicateur(digits_=5):
 
 st.title('Calculateur taille de position de trading')
 
-st.markdown('Répondez aux question pour calculer la taille de position de votre trade.')
+st.markdown('Répondez aux questions pour calculer la taille de position de votre trade.')
 
 capital = custom_input("Entrez le montant de votre capital", None)
 risque = custom_input("Quelle est le pourcentage de risque", 1)
